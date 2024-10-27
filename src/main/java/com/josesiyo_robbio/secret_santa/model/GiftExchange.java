@@ -3,6 +3,7 @@ package com.josesiyo_robbio.secret_santa.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -34,6 +35,7 @@ public class GiftExchange
         this.date = new Date(); 
         this.validateGifts = 0;
         this.active = true;
+        this.giftIdeas = new ArrayList<>();
     }
 
     // GETTERS
@@ -155,5 +157,7 @@ public class GiftExchange
         public void setParticipant(Participant participant)     { this.participant = participant;   }
 
         public boolean isApproved() { return approved; }
+
+
     }
 }

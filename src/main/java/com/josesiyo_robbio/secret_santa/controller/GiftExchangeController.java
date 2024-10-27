@@ -2,26 +2,25 @@ package com.josesiyo_robbio.secret_santa.controller;
 
 import com.josesiyo_robbio.secret_santa.model.GiftExchange;
 import com.josesiyo_robbio.secret_santa.service.GiftExchangeService;
+import com.josesiyo_robbio.secret_santa.service.GiftIdeaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("/api/exchanges")
 public  class GiftExchangeController
 {
+    private final GiftIdeaService giftIdeaService;
     private GiftExchangeService giftExchangeService;
 
     @Autowired
-    public GiftExchangeController(GiftExchangeService giftExchangeService)
+    public GiftExchangeController(GiftExchangeService giftExchangeService, GiftIdeaService giftIdeaService)
     {
         this.giftExchangeService = giftExchangeService;
+        this.giftIdeaService = giftIdeaService;
     }
 
     @PostMapping
@@ -44,5 +43,22 @@ public  class GiftExchangeController
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    @PostMapping("/addGiftIdea")
+    public ResponseEntity<String> addGiftIdea(@RequestBody GiftExchange.GiftIdea giftIdea) {
+        String response = giftIdeaService.insertNewIdeaGift(
+                giftIdea.getId(), // Asegúrate de agregar este método en tu clase GiftIdea
+                giftIdea.getDescription(),
+                giftIdea.getPrice(),
+                giftIdea.getUrl(),
+                giftIdea.getParticipant().getEmail() // Asegúrate de que el participante esté definido en giftIdea
+        );
+        return ResponseEntity.ok(response);
+    }
+
+
+
+
 }
 
