@@ -22,7 +22,7 @@ public class GiftExchangeService
     }
 
     public GiftExchange insertNewSecretSanta(String name, int numberParticipants,
-                                             double minBudget, double maxBudget, List<GiftExchange.Participant> participants)
+                                                double minBudget, double maxBudget, List<GiftExchange.Participant> participants)
     {
         try
         {
@@ -39,22 +39,25 @@ public class GiftExchangeService
             newExchange.setParticipants(participants);
             newExchange.setAssignments(assignments);
 
-            // Guardar el intercambio en la base de datos
             return giftExchangeRepository.save(newExchange);
         }
-        catch (Exception e) {
+        catch (Exception e) 
+        {
             System.err.println("Error inserting new Secret Santa: " + e.getMessage());
-            return null; // Manejo de errores, puedes lanzar una excepción o manejarlo como prefieras
+            return null; 
         }
     }
 
-    public List<GiftExchange.Assignment> generateAssignments(List<GiftExchange.Participant> participants) {
+
+
+    public List<GiftExchange.Assignment> generateAssignments(List<GiftExchange.Participant> participants) 
+    {
         List<GiftExchange.Assignment> assignments = new ArrayList<>();
         List<GiftExchange.Participant> availableParticipants = new ArrayList<>(participants);
         Random random = new Random();
 
-        // Si el número de participantes es impar
-        if (participants.size() % 2 != 0) {
+        if (participants.size() % 2 != 0) 
+        {
             int randomIndex = random.nextInt(participants.size());
             GiftExchange.Participant luckyParticipant = participants.get(randomIndex);
 
@@ -63,13 +66,15 @@ public class GiftExchangeService
         }
 
         // Lógica para generar asignaciones
-        for (GiftExchange.Participant sender : participants) {
+        for (GiftExchange.Participant sender : participants) 
+        {
             GiftExchange.Participant recipient;
 
             do {
                 int randomIndex = random.nextInt(availableParticipants.size());
                 recipient = availableParticipants.get(randomIndex);
-            } while (recipient.getEmail().equals(sender.getEmail()));
+            } 
+            while (recipient.getEmail().equals(sender.getEmail()));
 
             assignments.add(new GiftExchange.Assignment(sender.getEmail(), recipient.getEmail()));
             availableParticipants.remove(recipient);

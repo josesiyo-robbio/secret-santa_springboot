@@ -11,34 +11,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-    @RestController
-    @RequestMapping("/api/exchanges")
-    public  class GiftExchangeController
+
+@RestController
+@RequestMapping("/api/exchanges")
+public  class GiftExchangeController
+{
+    private GiftExchangeService giftExchangeService;
+
+    @Autowired
+    public GiftExchangeController(GiftExchangeService giftExchangeService)
     {
-        private GiftExchangeService giftExchangeService;
+        this.giftExchangeService = giftExchangeService;
+    }
 
-        @Autowired
-        public GiftExchangeController(GiftExchangeService giftExchangeService)
+    @PostMapping
+    public ResponseEntity<GiftExchange> createExchange(@RequestBody GiftExchange exchangeRequest)
+    {
+        GiftExchange createdExchange = giftExchangeService.insertNewSecretSanta(
+                exchangeRequest.getName(),
+                exchangeRequest.getNumberParticipants(),
+                exchangeRequest.getMinBudget(),
+                exchangeRequest.getMaxBudget(),
+                exchangeRequest.getParticipants()
+        );
+
+        if (createdExchange != null) 
         {
-            this.giftExchangeService = giftExchangeService;
-        }
-
-        @PostMapping
-        public ResponseEntity<GiftExchange> createExchange(@RequestBody GiftExchange exchangeRequest)
+            return new ResponseEntity<>(createdExchange, HttpStatus.CREATED);
+        } 
+        else 
         {
-            GiftExchange createdExchange = giftExchangeService.insertNewSecretSanta(
-                    exchangeRequest.getName(),
-                    exchangeRequest.getNumberParticipants(),
-                    exchangeRequest.getMinBudget(),
-                    exchangeRequest.getMaxBudget(),
-                    exchangeRequest.getParticipants()
-            );
-
-            if (createdExchange != null) {
-                return new ResponseEntity<>(createdExchange, HttpStatus.CREATED);
-            } else {
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+}
 

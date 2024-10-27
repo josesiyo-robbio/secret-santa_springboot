@@ -7,17 +7,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+
+
 @Document(collection = "exchanges")
-public class GiftExchange {
+public class GiftExchange 
+{
     @Id
-    private String id;
-    private String name;
-    private int numberParticipants;
-    private double minBudget;
-    private double maxBudget;
-    private Date date;
-    private boolean active;
-    private int validateGifts;
+    private String      id;
+    private String      name;
+    private int         numberParticipants;
+    private int         validateGifts;
+    private double      minBudget;
+    private double      maxBudget;
+    private Date        date;
+    private boolean     active;
+
 
     private List<Participant> participants;
     private List<Assignment> assignments;
@@ -25,256 +29,131 @@ public class GiftExchange {
     private List<GiftIdea> giftIdeas;
 
     // Constructor
-    public GiftExchange() {
-        this.date = new Date(); // Asigna la fecha actual al momento de la creación
+    public GiftExchange() 
+    {
+        this.date = new Date(); 
         this.validateGifts = 0;
         this.active = true;
-
     }
 
-    // Getters y Setters
-    public String getId() {
-        return id;
-    }
+    // GETTERS
+    public int                  getNumberParticipants()     { return numberParticipants;    }
+    public int                  getValidateGifts()          { return validateGifts;         }
+    public String               getId()                     { return id;                    }
+    public String               getName()                   { return name;                  }
+    public double               getMinBudget()              { return minBudget;             }
+    public double               getMaxBudget()              { return maxBudget;             }
+    public void                 setDate(Date date)          { this.date = date;             }
+    public Date                 getDate()                   { return date;                  }
+    public List<Participant>    getParticipants()           { return participants;          }
+    public List<Assignment>     getAssignments()            { return assignments;           }
+    public List<ReturnedGift>   getReturnedGifts()          { return returnedGifts;         }
+    public List<GiftIdea>       getGiftIdeas()              { return giftIdeas;             }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    //SETTERS
+    public void setId(String id)                                    { this.id = id;                                 }
+    public void setName(String name)                                { this.name = name;                             }
+    public void setNumberParticipants(int numberParticipants)       { this.numberParticipants = numberParticipants; }
+    public void setMinBudget(double minBudget)                      { this.minBudget = minBudget;                   }
+    public void setMaxBudget(double maxBudget)                      { this.maxBudget = maxBudget;                   }
+    public void setValidateGifts(int validateGifts)                 { this.validateGifts = validateGifts;           }
+    public void setParticipants(List<Participant> participants)     { this.participants = participants;             }
+    public void setAssignments(List<Assignment> assignments)        { this.assignments = assignments;               }
+    public void setReturnedGifts(List<ReturnedGift> returnedGifts)  { this.returnedGifts = returnedGifts;           }
+    public void setGiftIdeas(List<GiftIdea> giftIdeas)              { this.giftIdeas = giftIdeas;                   }
+    public void setActive(boolean active)                           { this.active = active;                         }
 
-    public String getName() {
-        return name;
-    }
+    public boolean isActive() { return active; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public int getNumberParticipants() {
-        return numberParticipants;
-    }
 
-    public void setNumberParticipants(int numberParticipants) {
-        this.numberParticipants = numberParticipants;
-    }
-
-    public double getMinBudget() {
-        return minBudget;
-    }
-
-    public void setMinBudget(double minBudget) {
-        this.minBudget = minBudget;
-    }
-
-    public double getMaxBudget() {
-        return maxBudget;
-    }
-
-    public void setMaxBudget(double maxBudget) {
-        this.maxBudget = maxBudget;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public int getValidateGifts() {
-        return validateGifts;
-    }
-
-    public void setValidateGifts(int validateGifts) {
-        this.validateGifts = validateGifts;
-    }
-
-    public List<Participant> getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(List<Participant> participants) {
-        this.participants = participants;
-    }
-
-    public List<Assignment> getAssignments() {
-        return assignments;
-    }
-
-    public void setAssignments(List<Assignment> assignments) {
-        this.assignments = assignments;
-    }
-
-    public List<ReturnedGift> getReturnedGifts() {
-        return returnedGifts;
-    }
-
-    public void setReturnedGifts(List<ReturnedGift> returnedGifts) {
-        this.returnedGifts = returnedGifts;
-    }
-
-    public List<GiftIdea> getGiftIdeas() {
-        return giftIdeas;
-    }
-
-    public void setGiftIdeas(List<GiftIdea> giftIdeas) {
-        this.giftIdeas = giftIdeas;
-    }
-
-    public static class Participant {
+    public static class Participant 
+    {
         private String name;
         private String email;
         private String exchangeId;
 
-        // Getters y Setters
-        public String getName() {
-            return name;
-        }
+        // GETTERS
+        public String getName()         { return name;          }
+        public String getExchangeId()   { return exchangeId;    }
+        public String getEmail()        { return email;         }
 
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String getExchangeId() {
-            return exchangeId;
-        }
-
-        public void setExchangeId(String exchangeId) {
-            this.exchangeId = exchangeId;
-        }
+        //SETTERS
+        public void setName(String name)                { this.name = name;             }
+        public void setEmail(String email)              { this.email = email;           }
+        public void setExchangeId(String exchangeId)    { this.exchangeId = exchangeId; }
     }
 
-    public static class Assignment {
+
+
+    public static class Assignment 
+    {
         private String sender;
         private String recipient;
 
-        public Assignment(String sender, String recipient) {
+        public Assignment(String sender, String recipient) 
+        {
             this.sender = sender;
             this.recipient = recipient;
         }
 
-        // Getters y Setters
-        public String getSender() {
-            return sender;
-        }
+        // GETTERS
+        public String getSender()       { return sender;    }
+        public String getRecipient()    { return recipient; }
 
-        public void setSender(String sender) {
-            this.sender = sender;
-        }
-
-        public String getRecipient() {
-            return recipient;
-        }
-
-        public void setRecipient(String recipient) {
-            this.recipient = recipient;
-        }
+        //SETTERS
+        public void setSender(String sender)        { this.sender = sender;         }
+        public void setRecipient(String recipient)  { this.recipient = recipient;   }
     }
 
-    public static class ReturnedGift {
+
+
+    public static class ReturnedGift 
+    {
         @Id
         private String id; // MongoDB ObjectId
         private String originalRecipient;
         private String description;
 
-        // Getters y Setters
-        public String getId() {
-            return id;
-        }
+        // GETTERS
+        public String getId()                   { return id;                }
+        public String getDescription()          { return description;       }
+        public String getOriginalRecipient()    { return originalRecipient; }
 
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getOriginalRecipient() {
-            return originalRecipient;
-        }
-
-        public void setOriginalRecipient(String originalRecipient) {
-            this.originalRecipient = originalRecipient;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
+        //SETTERS
+        public void setId(String id)                                { this.id = id;                                 }
+        public void setOriginalRecipient(String originalRecipient)  { this.originalRecipient = originalRecipient;   }
+        public void setDescription(String description)              { this.description = description;               }
     }
 
-    public static class GiftIdea { // Cambiado a GiftIdea
+
+
+    public static class GiftIdea 
+    {
         @Id
-        private String id; // MongoDB ObjectId
-        private String description;
-        private double price;
-        private String url;
-        private boolean approved;
-        private Participant participant;
+        private     String          id; // MongoDB ObjectId
+        private     String          description;
+        private     String          url;
+        private     double          price;
+        private     boolean         approved;
+        private     Participant     participant;
 
-        // Getters y Setters
-        public String getId() {
-            return id;
-        }
+        // GETTERS 
+        public String       getId()             { return id;            }
+        public String       getDescription()    { return description;   }
+        public String       getUrl()            { return url;           }
+        public double       getPrice()          { return price;         }
+        public Participant  getParticipant()    { return participant;   }
 
-        public void setId(String id) {
-            this.id = id;
-        }
 
-        public String getDescription() {
-            return description;
-        }
+        //SETTERS
+        public void setId(String id)                            { this.id = id;                     }
+        public void setDescription(String description)          { this.description = description;   }
+        public void setPrice(double price)                      { this.price = price;               }
+        public void setUrl(String url)                          { this.url = url;                   }
+        public void setApproved(boolean approved)               { this.approved = approved;         }
+        public void setParticipant(Participant participant)     { this.participant = participant;   }
 
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public double getPrice() {
-            return price;
-        }
-
-        public void setPrice(double price) {
-            this.price = price;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
-        public boolean isApproved() {
-            return approved;
-        }
-
-        public void setApproved(boolean approved) {
-            this.approved = approved;
-        }
-
-        public Participant getParticipant() {
-            return participant;
-        }
-
-        public void setParticipant(Participant participant) {
-            this.participant = participant;
-        }
+        public boolean isApproved() { return approved; }
     }
 }
