@@ -61,11 +61,10 @@ public class GiftExchangeService
             int randomIndex = random.nextInt(participants.size());
             GiftExchange.Participant luckyParticipant = participants.get(randomIndex);
 
-            // Asignar el regalo adicional al participante seleccionado
             assignments.add(new GiftExchange.Assignment(luckyParticipant.getEmail(), luckyParticipant.getEmail()));
         }
 
-        // Lógica para generar asignaciones
+
         for (GiftExchange.Participant sender : participants) 
         {
             GiftExchange.Participant recipient;
