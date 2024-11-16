@@ -1,4 +1,4 @@
-# Secret Santa Exchange API
+# Secret Santa Exchange
 
 ## Overview
 An advanced Secret Santa gift exchange API that allows users to create exchanges, manage gift ideas, and handle gift returns/exchanges. Built with Spring Boot and MongoDB, this API includes features like gift approval, return management, and dynamic gift reassignment.
